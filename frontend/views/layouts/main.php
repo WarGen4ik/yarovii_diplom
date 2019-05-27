@@ -60,14 +60,14 @@ AppAsset::register($this);
                         <div class="t454__leftmenuwrapper">
                             <ul class="t454__list">
                                 <li class="t454__list_item">
-                                    <a class="t-menu__link-item" href="#submenu:services"
+                                    <a class="t-menu__link-item" href="#submenu:about"
                                        style="color:#000000;font-weight:500;font-family:&apos;Rubik&apos;;"
-                                    >Вход</a>
+                                    >О компании</a>
                                 </li>
                                 <li class="t454__list_item">
-                                    <a class="t-menu__link-item" href="#submenu:pricing"
+                                    <a class="t-menu__link-item" href="#submenu:contacts"
                                        style="color:#000000;font-weight:500;font-family:&apos;Rubik&apos;;"
-                                    >Регистрация</a>
+                                    >Контакты</a>
                                 </li>
                                 <li class="t454__list_item">
                                     <a class="t-menu__link-item" href="#submenu:info"
@@ -80,16 +80,29 @@ AppAsset::register($this);
                     <div class="t454__rightwrapper" style="padding-right:20px; padding-left:160px; text-align: right;">
                         <div class="t454__rightmenuwrapper">
                             <ul class="t454__list">
+                                <?php if (Yii::$app->user->isGuest): ?>
                                 <li class="t454__list_item">
-                                    <a class="t-menu__link-item" href="#submenu:about"
+                                    <a class="t-menu__link-item" href="/site/login"
                                        style="color:#000000;font-weight:500;font-family:&apos;Rubik&apos;;"
-                                    >О компании</a>
+                                    >Вхід</a>
                                 </li>
                                 <li class="t454__list_item">
-                                    <a class="t-menu__link-item" href="#submenu:contacts"
+                                    <a class="t-menu__link-item" href="/site/register"
                                        style="color:#000000;font-weight:500;font-family:&apos;Rubik&apos;;"
-                                    >Контакты</a>
+                                    >Реєстрація</a>
                                 </li>
+                                <?php else: ?>
+                                    <li class="t454__list_item">
+                                        <a class="t-menu__link-item" href="/statement/create"
+                                           style="color:#000000;font-weight:500;font-family:&apos;Rubik&apos;;"
+                                        >Створити заявку</a>
+                                    </li>
+                                    <li class="t454__list_item">
+                                        <a class="t-menu__link-item" href="/site/logout"
+                                           style="color:#000000;font-weight:500;font-family:&apos;Rubik&apos;;"
+                                        >Вихід</a>
+                                    </li>
+                                <?php endif ?>
                             </ul>
                         </div>
                     </div>

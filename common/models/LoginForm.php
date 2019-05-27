@@ -62,6 +62,15 @@ class LoginForm extends Model
         return false;
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'email' => 'Email',
+            'password' => 'Пароль',
+            'rememberMe' => 'Запам\'ятувати мене'
+        ];
+    }
+
     /**
      * Finds user by [[email]]
      *
