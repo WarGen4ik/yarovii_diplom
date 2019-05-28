@@ -46,9 +46,9 @@ class CarTypes extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'slug' => 'Slug',
-            'name' => 'Name',
-            'maxVolume' => 'Max Volume',
-            'maxWeight' => 'Max Weight',
+            'name' => 'Назва',
+            'maxVolume' => 'Максимальний об\'єм',
+            'maxWeight' => 'Максимальна вага',
         ];
     }
 

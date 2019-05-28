@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "workers".
@@ -29,6 +32,23 @@ class Workers extends \yii\db\ActiveRecord
         return 'workers';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => null,
+                'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => null,
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -52,12 +72,12 @@ class Workers extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fio' => 'Fio',
-            'city' => 'City',
-            'phone' => 'Phone',
-            'car_type_id' => 'Car Type ID',
-            'created_by' => 'Created By',
-            'created_at' => 'Created At',
+            'fio' => 'ПІБ',
+            'city' => 'Місто проживання',
+            'phone' => 'Телефон',
+            'car_type_id' => 'Тип авто',
+            'created_by' => 'Ким доданий',
+            'created_at' => 'Коли доданий',
         ];
     }
 

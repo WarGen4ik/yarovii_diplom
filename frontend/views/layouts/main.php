@@ -60,19 +60,19 @@ AppAsset::register($this);
                         <div class="t454__leftmenuwrapper">
                             <ul class="t454__list">
                                 <li class="t454__list_item">
-                                    <a class="t-menu__link-item" href="#submenu:about"
+                                    <a class="t-menu__link-item" href="/"
                                        style="color:#000000;font-weight:500;font-family:&apos;Rubik&apos;;"
-                                    >О компании</a>
+                                    >Про компанію</a>
                                 </li>
                                 <li class="t454__list_item">
-                                    <a class="t-menu__link-item" href="#submenu:contacts"
+                                    <a class="t-menu__link-item" href="/site/contact"
                                        style="color:#000000;font-weight:500;font-family:&apos;Rubik&apos;;"
-                                    >Контакты</a>
+                                    >Контакти</a>
                                 </li>
                                 <li class="t454__list_item">
-                                    <a class="t-menu__link-item" href="#submenu:info"
+                                    <a class="t-menu__link-item" href="/"
                                        style="color:#000000;font-weight:500;font-family:&apos;Rubik&apos;;"
-                                    >Информация</a>
+                                    >Інформація</a>
                                 </li>
                             </ul>
                         </div>

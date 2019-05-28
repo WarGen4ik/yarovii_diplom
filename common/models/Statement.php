@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "statement".
@@ -14,6 +17,8 @@ use Yii;
  * @property string $status
  * @property string $cityFrom
  * @property string $cityTo
+ * @property float $weight
+ * @property float $volume
  * @property int $created_by
  * @property int $updated_by
  * @property string $created_at
@@ -25,12 +30,41 @@ use Yii;
  */
 class Statement extends \yii\db\ActiveRecord
 {
+    const STATUS_NEW='new';
+    const STATUS_ACTIVE='active';
+    const STATUS_FINISHED='finished';
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'statement';
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            BlameableBehavior::className(),
+        ];
+    }
+
+    public static function getStatusNames(){
+        return [
+            self::STATUS_NEW => 'Новий',
+            self::STATUS_ACTIVE => 'Активний',
+            self::STATUS_FINISHED => 'Завершений',
+        ];
+    }
+
+    public static function getStatusName($status){
+        return self::getStatusNames()[$status];
     }
 
     /**
@@ -40,7 +74,9 @@ class Statement extends \yii\db\ActiveRecord
     {
         return [
             [['worker_id', 'created_by', 'updated_by'], 'integer'],
-            [['fio', 'phone', 'status', 'cityFrom', 'cityTo'], 'required'],
+            [['fio', 'phone', 'status', 'cityFrom', 'cityTo', 'weight', 'volume'], 'required'],
+            [['weight', 'volume'], 'number'],
+            ['status', 'default', 'value' => self::STATUS_NEW],
             [['created_at', 'updated_at'], 'safe'],
             [['fio', 'phone', 'status', 'cityFrom', 'cityTo'], 'string', 'max' => 100],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
@@ -56,16 +92,18 @@ class Statement extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'worker_id' => 'Worker ID',
-            'fio' => 'Fio',
-            'phone' => 'Phone',
-            'status' => 'Status',
-            'cityFrom' => 'City From',
-            'cityTo' => 'City To',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'worker_id' => 'Водій',
+            'fio' => 'ПІБ',
+            'phone' => 'Телефон',
+            'status' => 'Статус',
+            'cityFrom' => 'Місто відправлення',
+            'cityTo' => 'Місто доставки',
+            'weight' => 'Вага',
+            'volume' => 'Об\'єм',
+            'created_by' => 'Ким створена',
+            'updated_by' => 'Ким оновлена',
+            'created_at' => 'Коли створена',
+            'updated_at' => 'Коли оновлена',
         ];
     }
 

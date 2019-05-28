@@ -20,6 +20,8 @@ class m190527_150351_create_statement_table extends Migration
             'status' => $this->string(100)->notNull(),
             'cityFrom' => $this->string(100)->notNull(),
             'cityTo' => $this->string(100)->notNull(),
+            'volume' => $this->float(2),
+            'weight' => $this->float(2),
             'created_by' => $this->integer(11),
             'updated_by' => $this->integer(11),
             'created_at' => $this->dateTime(),
